@@ -32,9 +32,11 @@ class PrimerFragment : Fragment() {
         val navController = Navigation.findNavController(view)
 
         botonSegundo.setOnClickListener{
+            //Preparamos las variables a utilizar.
             val titulo = ""
             val publi = 0
             val paginas = 0
+            //Si todos los EditText no están vacíos
             if (edTitulo.text.toString().isEmpty() || edPublicacion.text.toString().isEmpty() || edPaginas.text.toString().isEmpty()){
                 Toast.makeText(activity, "Debes introducir algún valor en todos los campos", Toast.LENGTH_SHORT).show()
             }else{
