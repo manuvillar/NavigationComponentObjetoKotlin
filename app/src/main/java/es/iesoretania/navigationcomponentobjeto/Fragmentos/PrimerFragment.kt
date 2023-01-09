@@ -9,10 +9,11 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import es.iesoretania.navigationcomponentobjeto.Libro
 import es.iesoretania.navigationcomponentobjeto.R
-import kotlinx.android.synthetic.main.fragment_primer.*
+import es.iesoretania.navigationcomponentobjeto.databinding.FragmentPrimerBinding
 
 
 class PrimerFragment : Fragment() {
+    private lateinit var binding: FragmentPrimerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,28 +24,25 @@ class PrimerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentPrimerBinding.inflate(layoutInflater,container,false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_primer, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
 
-        botonSegundo.setOnClickListener{
-            //Preparamos las variables a utilizar.
-            val titulo = ""
-            val publi = 0
-            val paginas = 0
+        binding.botonSegundo.setOnClickListener{
             //Si todos los EditText no están vacíos
-            if (edTitulo.text.toString().isEmpty() || edPublicacion.text.toString().isEmpty() || edPaginas.text.toString().isEmpty()){
+            if (binding.edTitulo.text.toString().isEmpty() || binding.edPublicacion.text.toString().isEmpty() || binding.edPaginas.text.toString().isEmpty()){
                 Toast.makeText(activity, "Debes introducir algún valor en todos los campos", Toast.LENGTH_SHORT).show()
             }else{
                 //Creamos un nuevo objeto de tipo Libro, capturando los valores de los EditText.
                 val registro = Libro(
-                    edTitulo.text.toString(),
-                    edPublicacion.text.toString().toInt(),
-                    edPaginas.text.toString().toInt()
+                    binding.edTitulo.text.toString(),
+                    binding.edPublicacion.text.toString().toInt(),
+                    binding.edPaginas.text.toString().toInt()
                 )
 
                 //Una vez comprobado que los EditText no están vacíos, y almacenados sus valores en el objeto,

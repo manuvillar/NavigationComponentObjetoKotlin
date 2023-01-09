@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import es.iesoretania.navigationcomponentobjeto.R
-import kotlinx.android.synthetic.main.fragment_segundo.*
+import es.iesoretania.navigationcomponentobjeto.databinding.FragmentSegundoBinding
+
 
 class SegundoFragment : Fragment() {
+    private lateinit var binding: FragmentSegundoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,8 +20,9 @@ class SegundoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentSegundoBinding.inflate(layoutInflater,container,false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_segundo, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,12 +36,12 @@ class SegundoFragment : Fragment() {
             //Sacamos de este Bundle el objeto de tipo Libro
             val registro = args.libro
 
-            tvTitulo.text = registro.Titulo
-            tvPublicacion.text = registro.Publicacion.toString()
-            tvPaginas.text = registro.Paginas.toString()
+            binding.tvTitulo.text = registro.Titulo
+            binding.tvPublicacion.text = registro.Publicacion.toString()
+            binding.tvPaginas.text = registro.Paginas.toString()
         }
 
-        botonFinal.setOnClickListener {
+        binding.botonFinal.setOnClickListener {
             //Volvemos al fragmento anterior en la pila de fragmentos.
             navController.popBackStack()
         }
